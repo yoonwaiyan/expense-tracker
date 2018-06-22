@@ -7,17 +7,15 @@
         stripe>
         <el-table-column
           prop="date"
-          label="日期"
-          width="180">
+          label="Date">
         </el-table-column>
         <el-table-column
-          prop="name"
-          label="姓名"
-          width="180">
+          prop="description"
+          label="Description">
         </el-table-column>
         <el-table-column
-          prop="address"
-          label="地址">
+          prop="category"
+          label="Category">
         </el-table-column>
       </el-table>
 
@@ -52,20 +50,20 @@
         },
         tableData: [{
           date: '2016-05-03',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          description: 'Nasi Lemak',
+          category: 'Food'
         }, {
           date: '2016-05-02',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          description: 'Tom Yam Soup',
+          category: 'Food'
         }, {
           date: '2016-05-04',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          description: 'Mixed Rice',
+          category: 'Food'
         }, {
           date: '2016-05-01',
-          name: 'Tom',
-          address: 'No. 189, Grove St, Los Angeles'
+          description: 'KFC',
+          category: 'Food'
         }]
       }
     },
