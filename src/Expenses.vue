@@ -1,22 +1,14 @@
 <template>
   <div>
     <h2>Expenses</h2>
-      <el-table
-        :data="tableData"
-        stripe>
-        <el-table-column
-          prop="date"
-          label="Date">
-        </el-table-column>
-        <el-table-column
-          prop="description"
-          label="Description">
-        </el-table-column>
-        <el-table-column
-          prop="category"
-          label="Category">
-        </el-table-column>
-      </el-table>
+    <el-table :data="tableData" stripe>
+      <el-table-column prop="date" label="Date">
+      </el-table-column>
+      <el-table-column prop="description" label="Description">
+      </el-table-column>
+      <el-table-column prop="category" label="Category">
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
