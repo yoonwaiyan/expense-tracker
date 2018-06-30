@@ -15,12 +15,14 @@
         <el-input v-model="amount"></el-input>
       </el-form-item>
     </el-form>
-    <el-button type="primary" @click="submitForm('formLabelAlign')">Create</el-button>
+    <el-button type="primary" @click="submitForm">Create</el-button>
     <el-button @click="resetForm('formLabelAlign')">Reset</el-button>
   </div>
 </template>
 
 <script>
+import { expensesDB } from '../firebaseConfig';
+
 export default {
   data() {
     return {
@@ -31,15 +33,22 @@ export default {
     };
   },
   methods: {
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert('submit!');
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
+    submitForm() {
+      const { date, description, category, amount } = this;
+      const expense = {
+        date,
+        description,
+        category,
+        amount
+      };
+      expensesDB
+        .add(expense)
+        .then(function(docRef) {
+          console.log('Document written with ID: ', docRef.id);
+        })
+        .catch(function(error) {
+          console.error('Error adding document: ', error);
+        });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
