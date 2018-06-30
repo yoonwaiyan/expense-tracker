@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { expensesDB } from '../firebaseConfig';
 
 export default {
@@ -32,14 +33,24 @@ export default {
       amount: ''
     };
   },
+  computed: {
+    ...mapGetters(['currentUser'])
+  },
   methods: {
     submitForm() {
-      const { date, description, category, amount } = this;
+      const {
+        date,
+        description,
+        category,
+        amount,
+        currentUser: { uid: userId }
+      } = this;
       const expense = {
         date,
         description,
         category,
-        amount
+        amount,
+        userId
       };
       expensesDB
         .add(expense)
