@@ -19,6 +19,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   created() {
     Firebase.auth().onAuthStateChanged(user => {
       if (user) {
