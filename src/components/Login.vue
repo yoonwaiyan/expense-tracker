@@ -3,10 +3,10 @@
     <h2>Login</h2>
     <el-form label-position="left" label-width="100px">
       <el-form-item label="Email">
-        <el-input type="email" id="email" placeholder="Enter email"></el-input>
+        <el-input v-model="email" type="email" id="email" placeholder="Enter email"></el-input>
       </el-form-item>
       <el-form-item label="Password">
-        <el-input type="password" id="password" placeholder="Enter password"></el-input>
+        <el-input v-model="password" type="password" id="password" placeholder="Enter password"></el-input>
       </el-form-item>
 
       <el-button type="primary" @click.prevent="signIn">Sign In</el-button>
@@ -19,10 +19,15 @@
 import Firebase from 'firebase';
 
 export default {
+  data() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
   methods: {
     signIn() {
-      var email = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
+      const { email, password } = this;
 
       Firebase.auth()
         .signInWithEmailAndPassword(email, password)

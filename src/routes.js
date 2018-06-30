@@ -5,7 +5,10 @@ export default [
   {
     path: '/',
     name: 'homeLink',
-    component: Dashboard
+    component: Dashboard,
+    meta: {
+      requiresAuth: true
+    }
   },
   { path: '/login', name: 'loginLink', component: Login },
   { path: '*', redirect: '/' }
