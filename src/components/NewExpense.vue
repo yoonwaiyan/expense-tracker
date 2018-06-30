@@ -1,15 +1,18 @@
 <template>
   <div>
     <h2>Add New Expense</h2>
-    <el-form ref="formLabelAlign" label-position="left" label-width="100px" :model="formLabelAlign">
-      <el-form-item label="Description">
-        <el-input v-model="formLabelAlign.description"></el-input>
-      </el-form-item>
+    <el-form label-position="left" label-width="100px">
       <el-form-item label="Date">
-        <el-input v-model="formLabelAlign.date"></el-input>
+        <el-date-picker v-model="date" type="date" placeholder="Pick a day" class="datepicker"></el-date-picker>
+      </el-form-item>
+      <el-form-item label="Description">
+        <el-input v-model="description"></el-input>
+      </el-form-item>
+      <el-form-item label="Category">
+        <el-input v-model="category"></el-input>
       </el-form-item>
       <el-form-item label="Amount">
-        <el-input v-model="formLabelAlign.amount"></el-input>
+        <el-input v-model="amount"></el-input>
       </el-form-item>
     </el-form>
     <el-button type="primary" @click="submitForm('formLabelAlign')">Create</el-button>
@@ -21,11 +24,10 @@
 export default {
   data() {
     return {
-      formLabelAlign: {
-        description: '',
-        data: '',
-        amount: ''
-      }
+      date: new Date(),
+      description: '',
+      category: '',
+      amount: ''
     };
   },
   methods: {
@@ -46,3 +48,9 @@ export default {
 };
 </script>
 
+<style>
+.datepicker.el-date-editor.el-input,
+.datapicker.el-date-editor.el-input__inner {
+  width: 100%;
+}
+</style>
