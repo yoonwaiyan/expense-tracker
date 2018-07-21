@@ -2,7 +2,7 @@
   <div>
     <h2>Expenses</h2>
     <el-table :data="getExpenses" stripe>
-      <el-table-column prop="date" label="Date">
+      <el-table-column prop="amount" label="Amount">
       </el-table-column>
       <el-table-column prop="description" label="Description">
       </el-table-column>
