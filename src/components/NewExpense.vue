@@ -3,16 +3,16 @@
     <h2>Add New Expense</h2>
     <el-form label-position="left" label-width="100px">
       <el-form-item label="Date">
-        <el-date-picker v-model="date" type="date" placeholder="Pick a day" class="datepicker"></el-date-picker>
+        <el-date-picker v-model="expense.date" type="date" placeholder="Pick a day" class="datepicker"></el-date-picker>
       </el-form-item>
       <el-form-item label="Description">
-        <el-input v-model="description"></el-input>
+        <el-input v-model="expense.description"></el-input>
       </el-form-item>
       <el-form-item label="Category">
-        <el-input v-model="category"></el-input>
+        <el-input v-model="expense.category"></el-input>
       </el-form-item>
       <el-form-item label="Amount">
-        <el-input v-model="amount"></el-input>
+        <el-input v-model="expense.amount"></el-input>
       </el-form-item>
     </el-form>
     <el-button type="primary" @click="submitForm">Create</el-button>
@@ -24,13 +24,19 @@
 import { mapGetters } from 'vuex';
 import { dbExpensesRef } from '../firebaseConfig';
 
+const setDefaultExpense = () => {
+  return {
+    date: new Date(),
+    description: '',
+    category: '',
+    amount: ''
+  };
+};
+
 export default {
   data() {
     return {
-      date: new Date(),
-      description: '',
-      category: '',
-      amount: ''
+      expense: setDefaultExpense()
     };
   },
   computed: {
@@ -39,10 +45,7 @@ export default {
   methods: {
     submitForm() {
       const {
-        date,
-        description,
-        category,
-        amount,
+        expense: { date, description, category, amount },
         currentUser: { uid: userId }
       } = this;
       const expense = {
@@ -52,8 +55,13 @@ export default {
         amount,
         userId
       };
-      console.log('saving expense: ', expense);
-      dbExpensesRef.push(expense);
+      const that = this;
+      dbExpensesRef
+        .push()
+        .set(expense)
+        .then(() => {
+          that.expense = setDefaultExpense();
+        });
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();
