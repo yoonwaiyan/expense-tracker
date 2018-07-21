@@ -22,7 +22,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { expensesDB } from '../firebaseConfig';
+import { dbExpensesRef } from '../firebaseConfig';
 
 export default {
   data() {
@@ -52,14 +52,7 @@ export default {
         amount,
         userId
       };
-      expensesDB
-        .add(expense)
-        .then(function(docRef) {
-          console.log('Document written with ID: ', docRef.id);
-        })
-        .catch(function(error) {
-          console.error('Error adding document: ', error);
-        });
+      dbExpensesRef.push(expense);
     },
     resetForm(formName) {
       this.$refs[formName].resetFields();

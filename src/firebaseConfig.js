@@ -5,10 +5,7 @@ const firebaseApp = !Firebase.apps.length
   ? Firebase.initializeApp(config.firebase)
   : Firebase.app();
 
-const firebaseDB = firebaseApp.firestore();
-const settings = { timestampsInSnapshots: true };
-firebaseDB.settings(settings);
+const db = firebaseApp.database();
+const dbExpensesRef = db.ref('expenses');
 
-const expensesDB = firebaseDB.collection('expenses');
-
-export { firebaseApp, expensesDB };
+export { firebaseApp, dbExpensesRef };

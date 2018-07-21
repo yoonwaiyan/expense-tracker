@@ -12,10 +12,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { dbExpensesRef } from './firebaseConfig';
+
+console.log('dbExpenses', dbExpensesRef);
 
 export default {
   computed: {
     ...mapGetters(['currentUser'])
+  },
+  created() {
+    this.$store.dispatch('setExpensesRef', dbExpensesRef);
   }
 };
 </script>
