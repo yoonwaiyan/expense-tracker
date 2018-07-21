@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Accounting from 'accounting-js';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { firebaseApp as Firebase } from './firebaseConfig';
@@ -15,6 +16,10 @@ Vue.config.productionTip = false;
 const router = new VueRouter({
   routes,
   mode: 'history'
+});
+
+Vue.filter('currency', function(val) {
+  return Accounting.formatMoney(val);
 });
 
 new Vue({
