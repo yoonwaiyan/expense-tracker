@@ -46,12 +46,13 @@ export default {
         currentUser: { uid: userId }
       } = this;
       const expense = {
-        date,
+        date: date.getTime(),
         description,
         category,
         amount,
         userId
       };
+      console.log('saving expense: ', expense);
       dbExpensesRef.push(expense);
     },
     resetForm(formName) {

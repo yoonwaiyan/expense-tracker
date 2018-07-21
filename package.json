@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "accounting-js": "^1.1.1",
+    "date-fns": "^1.29.0",
     "element-ui": "^2.4.1",
     "firebase": "^5.1.0",
     "vue": "^2.5.16",

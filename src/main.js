@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Accounting from 'accounting-js';
+import DateFNS from 'date-fns';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import { firebaseApp as Firebase } from './firebaseConfig';
@@ -20,6 +21,11 @@ const router = new VueRouter({
 
 Vue.filter('currency', function(val) {
   return Accounting.formatMoney(val);
+});
+
+Vue.filter('date', function(val) {
+  if (!val) return 'N/A';
+  return DateFNS.format(val, 'MM/DD/YYYY');
 });
 
 new Vue({
