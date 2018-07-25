@@ -7,5 +7,6 @@ const firebaseApp = !Firebase.apps.length
 
 const db = firebaseApp.database();
 const dbExpensesRef = db.ref('expenses');
+const dbCategoriesRef = db.ref('categories');
 
-export { firebaseApp, dbExpensesRef };
+export { firebaseApp, dbExpensesRef, dbCategoriesRef };

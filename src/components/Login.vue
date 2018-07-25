@@ -52,7 +52,7 @@ export default {
           alert('Logged Out');
         })
         .catch(function(error) {
-          alert('error');
+          alert('error', error);
         });
     }
   }
