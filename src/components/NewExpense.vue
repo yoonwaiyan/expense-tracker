@@ -9,14 +9,17 @@
         <el-input v-model="expense.description"></el-input>
       </el-form-item>
       <el-form-item label="Category">
-        <el-input v-model="expense.category"></el-input>
+        <el-select v-model="expense.category" placeholder="Select" class="el-select-custom">
+          <el-option v-for="category in getCategories" :key="category.uid" :label="category.name" :value="category.name">
+          </el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="Amount">
         <el-input v-model="expense.amount"></el-input>
       </el-form-item>
     </el-form>
     <el-button type="primary" @click="submitForm">Create</el-button>
-    <el-button @click="resetForm('formLabelAlign')">Reset</el-button>
+    <el-button @click="resetForm">Reset</el-button>
   </div>
 </template>
 
@@ -40,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'getCategories'])
   },
   methods: {
     submitForm() {
@@ -63,8 +66,8 @@ export default {
           that.expense = setDefaultExpense();
         });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    resetForm() {
+      this.expense = setDefaultExpense();
     }
   }
 };
@@ -73,6 +76,10 @@ export default {
 <style>
 .datepicker.el-date-editor.el-input,
 .datapicker.el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+.el-select-custom {
   width: 100%;
 }
 </style>
