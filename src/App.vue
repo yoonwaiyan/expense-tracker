@@ -12,9 +12,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { dbExpensesRef } from './firebaseConfig';
-
-console.log('dbExpenses', dbExpensesRef);
+import { dbExpensesRef, dbCategoriesRef } from './firebaseConfig';
 
 export default {
   computed: {
@@ -22,6 +20,7 @@ export default {
   },
   created() {
     this.$store.dispatch('setExpensesRef', dbExpensesRef);
+    this.$store.dispatch('setCategoriesRef', dbCategoriesRef);
   }
 };
 </script>

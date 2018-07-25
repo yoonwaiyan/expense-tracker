@@ -1,7 +1,7 @@
 import { firebaseAction } from 'vuexfire';
 
 const state = {
-  expenses: []
+  categories: []
 };
 
 const getters = {
