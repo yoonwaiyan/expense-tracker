@@ -10,7 +10,6 @@
       </el-form-item>
 
       <el-button type="primary" @click.prevent="signIn">Sign In</el-button>
-      <el-button @click.prevent="signOut">Sign Out</el-button>
     </el-form>
   </div>
 </template>
@@ -44,16 +43,6 @@ export default {
           } else {
             alert(errorMessage);
           }
-        });
-    },
-    signOut() {
-      Firebase.auth()
-        .signOut()
-        .then(function() {
-          alert('Logged Out');
-        })
-        .catch(function(error) {
-          alert('error', error);
         });
     }
   }
