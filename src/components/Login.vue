@@ -28,11 +28,12 @@ export default {
   methods: {
     signIn() {
       const { email, password } = this;
+      const router = this.$router;
 
       Firebase.auth()
         .signInWithEmailAndPassword(email, password)
         .then(function() {
-          console.log('logged in');
+          router.push({ name: 'homeLink' });
         })
         .catch(function(error) {
           var errorCode = error.code;
