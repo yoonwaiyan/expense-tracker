@@ -10,6 +10,7 @@ import { store } from './store/store';
 import routes from './routes';
 import App from './App.vue';
 
+let app;
 Vue.use(VueRouter);
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
@@ -17,6 +18,18 @@ Vue.config.productionTip = false;
 const router = new VueRouter({
   routes,
   mode: 'history'
+});
+
+router.beforeEach((to, from, next) => {
+  const currentUser = Firebase.auth().currentUser;
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth && !currentUser) {
+    next('/login');
+  } else if (requiresAuth && currentUser) {
+    next();
+  } else {
+    next();
+  }
 });
 
 Vue.filter('currency', function(val) {
@@ -28,29 +41,18 @@ Vue.filter('date', function(val) {
   return DateFNS.format(val, 'MM/DD/YYYY');
 });
 
-new Vue({
-  router,
-  store,
-  created() {
-    Firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        store.dispatch('setUser', user);
-      } else {
-        store.dispatch('setUser', null);
-      }
-    });
+Firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    store.dispatch('setUser', user);
+  } else {
+    store.dispatch('setUser', null);
+  }
 
-    router.beforeEach((to, from, next) => {
-      const currentUser = Firebase.auth().currentUser;
-      const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-      if (requiresAuth && !currentUser) {
-        next('/login');
-      } else if (requiresAuth && currentUser) {
-        next();
-      } else {
-        next();
-      }
-    });
-  },
-  render: h => h(App)
-}).$mount('#app');
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App)
+    }).$mount('#app');
+  }
+});
